@@ -210,10 +210,10 @@ namespace Work_Project_1_Figures
 
         private void menuSaveBtn_Click(object sender, EventArgs e)
         {
-            SerializeToJson();
+            FileManager.Save(figures);
         }
 
-        private byte[] SerializeToBinary()
+        /*private byte[] SerializeToBinary()
         {
             BinaryFormatter formatter = new BinaryFormatter();
             MemoryStream memStream = new MemoryStream();
@@ -251,6 +251,6 @@ namespace Work_Project_1_Figures
             ms.Close();
 
             return str;
-        }
+        }*/
     }
 }
