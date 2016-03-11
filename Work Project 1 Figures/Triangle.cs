@@ -16,13 +16,13 @@ namespace Work_Project_1_Figures
     {
         [DataMember]
         public int size;
-        [DataMember, XmlIgnore]
+        [DataMember]
         private PointF A;
-        [DataMember, XmlIgnore]
+        [DataMember]
         private PointF B;
-        [DataMember, XmlIgnore]
+        [DataMember]
         private PointF C;
-        [DataMember, XmlIgnore]
+        [DataMember]
         private Size motionVector;
         [XmlIgnore]
         private Pen drawingPen
@@ -36,11 +36,11 @@ namespace Work_Project_1_Figures
 
             }
         }
-        [DataMember, XmlIgnore]
+        [DataMember]
         int R_Channel;
-        [DataMember, XmlIgnore]
+        [DataMember]
         int G_Channel;
-        [DataMember, XmlIgnore]
+        [DataMember]
         int B_Channel;
 
 
