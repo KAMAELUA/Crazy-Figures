@@ -17,7 +17,7 @@ namespace Work_Project_1_Figures
 
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                if(fileDialog.FilterIndex == 1)
+                if (fileDialog.FilterIndex == 1)
                 {
                     StreamWriter file = new StreamWriter(fileDialog.FileName, false);
                     String str = Serializer.SerializeToXml(list);
@@ -46,7 +46,32 @@ namespace Work_Project_1_Figures
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "XML files (*.xml)|*.xml|JSON files (*.json)|*.json|Binary files (*.bin)|*.bin";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (fileDialog.FilterIndex == 1)
+                {
+                    using (Stream fileStream = fileDialog.OpenFile())
+                    {
+                        return Serializer.DeserializeFromXml(fileStream);
+                    }
+                }
+                else if (fileDialog.FilterIndex == 2)
+                {
+                    using (Stream fileStream = fileDialog.OpenFile())
+                    {
+                        return Serializer.DeserializeFromJson(fileStream);
+                    }
 
+                }
+                else if (fileDialog.FilterIndex == 3)
+                {
+                    using (Stream fileStream = fileDialog.OpenFile())
+                    {
+                        return Serializer.DeserializeFromBinary(fileStream);
+                    }
+
+                }
+            }
             return new List<Figure>();
         }
     }

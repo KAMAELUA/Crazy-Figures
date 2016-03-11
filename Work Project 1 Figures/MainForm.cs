@@ -89,7 +89,7 @@ namespace Work_Project_1_Figures
             Triangle tmpFigure = new Triangle();
             figures.Add(tmpFigure);
 
-            TreeNode elementNode = new TreeNode(Localization.GetLocalizedString("Triangle"));
+            TreeNode elementNode = new TreeNode(Localization.GetLocalizedString(tmpFigure.GetType().Name));
             elementNode.ForeColor = Color.FromArgb(tmpFigure.argbColor);
             elementNode.Tag = tmpFigure;
             elementsTree.Nodes.Add(elementNode);
@@ -100,7 +100,7 @@ namespace Work_Project_1_Figures
             Circle tmpFigure = new Circle();
             figures.Add(tmpFigure);
 
-            TreeNode elementNode = new TreeNode(Localization.GetLocalizedString("Circle"));
+            TreeNode elementNode = new TreeNode(Localization.GetLocalizedString(tmpFigure.GetType().Name));
             elementNode.ForeColor = Color.FromArgb(tmpFigure.argbColor);
             elementNode.Tag = tmpFigure;
             elementsTree.Nodes.Add(elementNode);
@@ -111,7 +111,7 @@ namespace Work_Project_1_Figures
             CustomRectangle tmpFigure = new CustomRectangle();
             figures.Add(tmpFigure);
 
-            TreeNode elementNode = new TreeNode(Localization.GetLocalizedString("Rectangle"));
+            TreeNode elementNode = new TreeNode(Localization.GetLocalizedString(tmpFigure.GetType().Name));
             elementNode.ForeColor = Color.FromArgb(tmpFigure.argbColor);
             elementNode.Tag = tmpFigure;
             elementsTree.Nodes.Add(elementNode);
@@ -203,54 +203,22 @@ namespace Work_Project_1_Figures
             Localization.ApplyLicalizationForControl(this);
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void menuSaveBtn_Click(object sender, EventArgs e)
         {
             FileManager.Save(figures);
         }
 
-        /*private byte[] SerializeToBinary()
+        private void menuOpenBtn_Click(object sender, EventArgs e)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            MemoryStream memStream = new MemoryStream();
-
-            formatter.Serialize(memStream, figures);
-            byte[] obj = memStream.ToArray();
-            memStream.Close();
-            
-            return obj;           
+            elementsTree.Nodes.Clear();
+            figures = FileManager.Open();
+            foreach (Figure F in figures)
+            {
+                TreeNode elementNode = new TreeNode(Localization.GetLocalizedString(F.GetType().Name));
+                elementNode.ForeColor = Color.FromArgb(F.argbColor);
+                elementNode.Tag = F;
+                elementsTree.Nodes.Add(elementNode);
+            }
         }
-
-        private String SerializeToXml()
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Figure>));
-            MemoryStream ms = new MemoryStream();
-            serializer.Serialize(ms, figures);
-            ms.Position = 0;
-            StreamReader sr = new StreamReader(ms);
-            
-            String str = sr.ReadToEnd();
-            ms.Close();
-
-            return str;
-        }
-
-        private String SerializeToJson()
-        {
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(List<Figure>));
-            MemoryStream ms = new MemoryStream();
-            ser.WriteObject(ms, figures);
-            ms.Position = 0;
-            StreamReader sr = new StreamReader(ms);
-
-            String str = sr.ReadToEnd();
-            ms.Close();
-
-            return str;
-        }*/
     }
 }

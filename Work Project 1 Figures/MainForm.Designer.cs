@@ -110,12 +110,12 @@
             this.menuSaveBtn,
             this.menuCloseBtn});
             this.FileStrimMenuItem.Name = "FileStrimMenuItem";
-            this.FileStrimMenuItem.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // menuOpenBtn
             // 
             resources.ApplyResources(this.menuOpenBtn, "menuOpenBtn");
             this.menuOpenBtn.Name = "menuOpenBtn";
+            this.menuOpenBtn.Click += new System.EventHandler(this.menuOpenBtn_Click);
             // 
             // menuSaveBtn
             // 
