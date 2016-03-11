@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Work_Project_1_Figures
 {
     [Serializable()]
-    class CustomRectangle : Figure
+    public class CustomRectangle : Figure
     {
         private int size;
         private Rectangle figure;

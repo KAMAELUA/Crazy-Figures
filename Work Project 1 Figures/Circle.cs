@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 namespace Work_Project_1_Figures
 {
     [Serializable(), DataContract]
-    class Circle : Figure
+    public class Circle : Figure
     {
         [DataMember]
         private int size;

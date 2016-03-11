@@ -12,17 +12,17 @@ using System.Xml.Serialization;
 namespace Work_Project_1_Figures
 {
     [Serializable(), DataContract]
-    class Triangle : Figure
+    public class Triangle : Figure
     {
         [DataMember]
-        private int size;
-        [DataMember]
+        public int size;
+        [DataMember, XmlIgnore]
         private PointF A;
-        [DataMember]
+        [DataMember, XmlIgnore]
         private PointF B;
-        [DataMember]
+        [DataMember, XmlIgnore]
         private PointF C;
-        [DataMember]
+        [DataMember, XmlIgnore]
         private Size motionVector;
         [XmlIgnore]
         private Pen drawingPen
@@ -36,17 +36,17 @@ namespace Work_Project_1_Figures
 
             }
         }
-        [DataMember]
+        [DataMember, XmlIgnore]
         int R_Channel;
-        [DataMember]
+        [DataMember, XmlIgnore]
         int G_Channel;
-        [DataMember]
+        [DataMember, XmlIgnore]
         int B_Channel;
 
 
-        
 
 
+        [XmlIgnore]
         public override Color FigureColor
         {
             get
