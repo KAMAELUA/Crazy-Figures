@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InformationLibrary;
+using System;
 using System.Drawing;
 using System.Runtime.Serialization;
 
@@ -18,15 +19,19 @@ namespace Work_Project_1_Figures
         private Pen drawingPen
         {
             get { return new Pen(Color.FromArgb(argbColor)); }
-        }    
-        
+        }
+
         public CustomRectangle()
         {
             Random R = new Random();
 
-            size = R.Next(80, 150);
+            size = R.Next(
+                ConstantLibrary.RectangleSizeRange.MIN,
+                ConstantLibrary.RectangleSizeRange.MAX);
             figure = new Rectangle(0, 0, size, size);
-            motionVector = new Size(R.Next(3, 15), R.Next(3, 15));
+            motionVector = new Size(
+                R.Next(ConstantLibrary.RectangleMotionVector.MIN, ConstantLibrary.RectangleMotionVector.MAX),
+                R.Next(ConstantLibrary.RectangleMotionVector.MIN, ConstantLibrary.RectangleMotionVector.MAX));
             argbColor = Randomizer.GetRandomArgbColor();
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InformationLibrary;
+using System;
 using System.Drawing;
 using System.Runtime.Serialization;
 
@@ -29,8 +30,12 @@ namespace Work_Project_1_Figures
         public Triangle()
         {
             Random R = new Random();
-            size = R.Next(80, 150);
-            motionVector = new Size(R.Next(3, 15), R.Next(3, 15));
+            size = R.Next(
+                ConstantLibrary.TriangleSizeRange.MIN,
+                ConstantLibrary.TriangleSizeRange.MAX);
+            motionVector = new Size(
+                R.Next(ConstantLibrary.CircleMotionVector.MIN, ConstantLibrary.CircleMotionVector.MAX),
+                R.Next(ConstantLibrary.CircleMotionVector.MIN, ConstantLibrary.CircleMotionVector.MAX));
 
             A = new PointF(0, 0);
             B = new PointF(size, 0);

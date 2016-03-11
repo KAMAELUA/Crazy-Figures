@@ -22,7 +22,7 @@ namespace Work_Project_1_Figures
             {
                 str = LocRM.GetString(key);
             }
-            catch(Exception ex) { }
+            catch(Exception) { }
             return str;
         }
         public static void ChangeLocale(String locale)
@@ -49,10 +49,7 @@ namespace Work_Project_1_Figures
                     }
                     
                 }
-                catch (CultureNotFoundException exc)
-                {
-                    
-                }
+                catch (CultureNotFoundException){}
             }
 
             return listOfLangs;

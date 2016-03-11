@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using InformationLibrary;
 
 namespace Work_Project_1_Figures
 {
@@ -30,9 +31,13 @@ namespace Work_Project_1_Figures
         {
             Random R = new Random();
 
-            size = R.Next(80, 150);
+            size = R.Next(
+                ConstantLibrary.CircleSizeRange.MIN,
+                ConstantLibrary.CircleSizeRange.MAX);
             circleOuterRectangle = new RectangleF(0, 0, size, size);
-            motionVector = new Size(R.Next(3, 15), R.Next(3, 15));
+            motionVector = new Size(
+                R.Next(ConstantLibrary.CircleMotionVector.MIN, ConstantLibrary.CircleMotionVector.MAX),
+                R.Next(ConstantLibrary.CircleMotionVector.MIN, ConstantLibrary.CircleMotionVector.MAX));
             argbColor = Randomizer.GetRandomArgbColor();
         }
 
@@ -43,7 +48,7 @@ namespace Work_Project_1_Figures
 
         public override void Move(Size maxPoint)
         {
-            if(isOnMove)
+            if (isOnMove)
             {
                 if (IsCrossingXAxis(maxPoint))
                     motionVector.Width = -motionVector.Width;
