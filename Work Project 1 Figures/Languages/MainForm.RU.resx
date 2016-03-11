@@ -138,7 +138,7 @@
   <data name="menuCloseBtn.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
-  <data name="Rectangle" xml:space="preserve">
+  <data name="CustomRectangle" xml:space="preserve">
     <value>Прямоугольник</value>
   </data>
   <data name="Triangle" xml:space="preserve">
