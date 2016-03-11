@@ -21,7 +21,7 @@ namespace Work_Project_1_Figures
                 {
                     StreamWriter file = new StreamWriter(sf.FileName, false);
                     String str = Serializer.SerializeToXml(list);
-                    file.WriteLine(list);
+                    file.WriteLine(str);
                     file.Close();
                 }
                 else if (sf.FilterIndex == 2)
