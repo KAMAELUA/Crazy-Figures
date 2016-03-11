@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace Work_Project_1_Figures
 {
-    [
+    [ Serializable,
         XmlInclude(typeof(Triangle)),
         XmlInclude(typeof(Circle)),
         XmlInclude(typeof(CustomRectangle)),
@@ -18,14 +18,11 @@ namespace Work_Project_1_Figures
         KnownType(typeof(CustomRectangle))]
     public abstract class Figure
     {
-        [XmlIgnore]
+        [DataMember]
         public Boolean isOnMove = false;
-        [XmlIgnore]
-        public abstract Color FigureColor
-        {
-            get;
-            set;
-        }
+
+        [DataMember]
+        public int argbColor;
         
         public Figure(){ }
         

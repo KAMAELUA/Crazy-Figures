@@ -1,85 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Resources;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 
 namespace Work_Project_1_Figures
 {
-    [Serializable(), DataContract]
+    [Serializable, DataContract]
     public class Triangle : Figure
     {
         [DataMember]
         public int size;
         [DataMember]
-        private PointF A;
+        public PointF A;
         [DataMember]
-        private PointF B;
+        public PointF B;
         [DataMember]
-        private PointF C;
+        public PointF C;
         [DataMember]
-        private Size motionVector;
-        [XmlIgnore]
+        public Size motionVector;
+
         private Pen drawingPen
         {
             get
             {
-                return new Pen(FigureColor);
-            }
-            set
-            {
-
-            }
-        }
-        [DataMember]
-        int R_Channel;
-        [DataMember]
-        int G_Channel;
-        [DataMember]
-        int B_Channel;
-
-
-
-
-        [XmlIgnore]
-        public override Color FigureColor
-        {
-            get
-            {
-                return Color.FromArgb(255, R_Channel, G_Channel, B_Channel);
-            }
-            set
-            {
-                R_Channel = value.R;
-                G_Channel = value.G;
-                B_Channel = value.B;                
+                return new Pen(Color.FromArgb(argbColor));
             }
         }
 
         public Triangle()
         {
-            
             Random R = new Random();
             size = R.Next(80, 150);
-
             motionVector = new Size(R.Next(3, 15), R.Next(3, 15));
 
             A = new PointF(0, 0);
-            B = new PointF();
-            C = new PointF();
+            B = new PointF(size, 0);
+            C = new PointF(size/2, (float)(size * Math.Cos(Math.PI / 6)));
 
-            B.X = size;
-            B.Y = 0;
-
-            C.X = size / 2;
-            C.Y = (float)(size * Math.Cos(Math.PI / 6));
-
-            FigureColor = GetRandomColor();
+            argbColor = Randomizer.GetRandomArgbColor();
         }
 
         public override void Draw(Graphics g)
@@ -112,8 +69,8 @@ namespace Work_Project_1_Figures
             }
             else
                 return false;
-
         }
+
         private Boolean IsCrossingYAxis(Size maxPoint)
         {
             PointF tmpA = PointF.Add(A, motionVector);
@@ -124,16 +81,6 @@ namespace Work_Project_1_Figures
             }
             else
                 return false;
-        }
-
-        private Color GetRandomColor()
-        {
-            Random R = new Random();
-            int red = R.Next(0, 255);
-            int green = R.Next(0, 255);
-            int blue = R.Next(0, 255);
-
-            return Color.FromArgb(255, red, green, blue);
         }
     }
 }

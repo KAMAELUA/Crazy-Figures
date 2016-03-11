@@ -90,7 +90,7 @@ namespace Work_Project_1_Figures
             figures.Add(tmpFigure);
 
             TreeNode elementNode = new TreeNode(Localization.GetLocalizedString("Triangle"));
-            elementNode.ForeColor = tmpFigure.FigureColor;
+            elementNode.ForeColor = Color.FromArgb(tmpFigure.argbColor);
             elementNode.Tag = tmpFigure;
             elementsTree.Nodes.Add(elementNode);
         }
@@ -101,7 +101,7 @@ namespace Work_Project_1_Figures
             figures.Add(tmpFigure);
 
             TreeNode elementNode = new TreeNode(Localization.GetLocalizedString("Circle"));
-            elementNode.ForeColor = tmpFigure.FigureColor;
+            elementNode.ForeColor = Color.FromArgb(tmpFigure.argbColor);
             elementNode.Tag = tmpFigure;
             elementsTree.Nodes.Add(elementNode);
         }
@@ -112,7 +112,7 @@ namespace Work_Project_1_Figures
             figures.Add(tmpFigure);
 
             TreeNode elementNode = new TreeNode(Localization.GetLocalizedString("Rectangle"));
-            elementNode.ForeColor = tmpFigure.FigureColor;
+            elementNode.ForeColor = Color.FromArgb(tmpFigure.argbColor);
             elementNode.Tag = tmpFigure;
             elementsTree.Nodes.Add(elementNode);
         }

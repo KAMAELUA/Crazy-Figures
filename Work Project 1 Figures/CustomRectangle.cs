@@ -1,20 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Work_Project_1_Figures
 {
-    [Serializable()]
+    [Serializable, DataContract]
     public class CustomRectangle : Figure
     {
-        private int size;
-        private Rectangle figure;
-        private Pen drawingPen;
-        private Size motionVector;
+        [DataMember]
+        public int size;
+        [DataMember]
+        public Rectangle figure;
 
+        [DataMember]
+        public Size motionVector;
+
+        private Pen drawingPen
+        {
+            get { return new Pen(Color.FromArgb(argbColor)); }
+        }    
+        
         public CustomRectangle()
         {
             Random R = new Random();
@@ -22,19 +27,7 @@ namespace Work_Project_1_Figures
             size = R.Next(80, 150);
             figure = new Rectangle(0, 0, size, size);
             motionVector = new Size(R.Next(3, 15), R.Next(3, 15));
-            drawingPen = GetRandomPen();
-        }
-
-        public override Color FigureColor
-        {
-            get
-            {
-                return drawingPen.Color;
-            }
-            set
-            {
-
-            }
+            argbColor = Randomizer.GetRandomArgbColor();
         }
 
         public override void Draw(Graphics g)
@@ -74,16 +67,6 @@ namespace Work_Project_1_Figures
             if (tmpLeftPoint < 0 || tmpRightPoint > maxPoint.Width)
                 return true;
             else return false;
-        }
-
-        private Pen GetRandomPen()
-        {
-            Random R = new Random();
-            int red = R.Next(0, 255);
-            int green = R.Next(0, 255);
-            int blue = R.Next(0, 255);
-
-            return new Pen(Color.FromArgb(255, red, green, blue));
         }
     }
 }
