@@ -12,34 +12,42 @@ namespace Work_Project_1_Figures
     {
         public static Boolean Save(List<Figure> list)
         {
-            SaveFileDialog sf = new SaveFileDialog();
-            sf.Filter = "XML files (*.xml)|*.xml|JSON files (*.json)|*.json|Binary files (*.bin)|*.bin";
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            fileDialog.Filter = "XML files (*.xml)|*.xml|JSON files (*.json)|*.json|Binary files (*.bin)|*.bin";
 
-            if (sf.ShowDialog() == DialogResult.OK)
+            if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                if(sf.FilterIndex == 1)
+                if(fileDialog.FilterIndex == 1)
                 {
-                    StreamWriter file = new StreamWriter(sf.FileName, false);
+                    StreamWriter file = new StreamWriter(fileDialog.FileName, false);
                     String str = Serializer.SerializeToXml(list);
                     file.WriteLine(str);
                     file.Close();
                 }
-                else if (sf.FilterIndex == 2)
+                else if (fileDialog.FilterIndex == 2)
                 {
-                    StreamWriter file = new StreamWriter(sf.FileName, false);
+                    StreamWriter file = new StreamWriter(fileDialog.FileName, false);
                     String str = Serializer.SerializeToJson(list);
                     file.WriteLine(str);
                     file.Close();
                 }
-                else if (sf.FilterIndex == 3)
+                else if (fileDialog.FilterIndex == 3)
                 {
-                    FileStream file = new FileStream(sf.FileName, FileMode.Create, FileAccess.Write);
+                    FileStream file = new FileStream(fileDialog.FileName, FileMode.Create, FileAccess.Write);
                     Byte[] bytes = Serializer.SerializeToByte(list);
                     file.Write(bytes, 0, bytes.Length);
                     file.Close();
                 }
             }
             return true;
+        }
+
+        public static List<Figure> Open()
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "XML files (*.xml)|*.xml|JSON files (*.json)|*.json|Binary files (*.bin)|*.bin";
+
+            return new List<Figure>();
         }
     }
 }
