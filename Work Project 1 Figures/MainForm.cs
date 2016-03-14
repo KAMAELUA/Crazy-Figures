@@ -166,6 +166,17 @@ namespace Work_Project_1_Figures
                 F.Move(drawingSize);
                 F.Draw(e.Graphics);
             }
+
+            foreach(Figure F1 in figures)
+            {
+                List<Figure> tmpList = new List<Figure>(figures);
+                tmpList.Remove(F1);
+
+                foreach(Figure F2 in tmpList)
+                {
+
+                }
+            }
         }
 
         private void elementsTree_KeyDown(object sender, KeyEventArgs e)

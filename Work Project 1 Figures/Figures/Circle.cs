@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 using InformationLibrary;
+using Work_Project_1_Figures.Events;
+using System.Threading;
 
 namespace Work_Project_1_Figures
 {
@@ -26,6 +23,15 @@ namespace Work_Project_1_Figures
 
         [DataMember]
         private Size motionVector;
+
+        public event EventHandler<IntersectionEventArgs> StartsIntersect;
+
+        protected virtual void OnStartIntersect(IntersectionEventArgs e)
+        {
+            EventHandler<IntersectionEventArgs> temp = Volatile.Read(ref StartsIntersect);
+
+            if (temp != null) temp(this, e);
+        }
 
         public Circle()
         {
