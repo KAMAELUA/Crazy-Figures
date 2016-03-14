@@ -72,6 +72,8 @@
     <Compile Include="Figures\CustomRectangle.cs" />
     <Compile Include="Figures\Figure.cs" />
     <Compile Include="FileManager.cs" />
+    <Compile Include="Interfaces\IDrawable.cs" />
+    <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Languages\MainForm.EN.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

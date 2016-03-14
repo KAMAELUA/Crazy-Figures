@@ -54,6 +54,11 @@ namespace Work_Project_1_Figures.Figures
             }
         }
 
+        public override RectangleF GetOuterFigureRectangle()
+        {
+            return figure;
+        }
+
         private bool IsCrossingYAxis(Size maxPoint)
         {
             float tmpTopPoint = figure.Top + motionVector.Height;

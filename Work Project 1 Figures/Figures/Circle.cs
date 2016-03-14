@@ -23,15 +23,7 @@ namespace Work_Project_1_Figures.Figures
 
         [DataMember]
         private Size motionVector;
-
-        public event EventHandler<IntersectionEventArgs> StartsIntersect;
-
-        protected virtual void OnStartIntersect(IntersectionEventArgs e)
-        {
-            EventHandler<IntersectionEventArgs> temp = Volatile.Read(ref StartsIntersect);
-
-            if (temp != null) temp(this, e);
-        }
+        
 
         public Circle()
         {
@@ -64,6 +56,11 @@ namespace Work_Project_1_Figures.Figures
                 PointF circleLocation = circleOuterRectangle.Location;
                 circleOuterRectangle.Location = PointF.Add(circleLocation, motionVector);
             }
+        }
+
+        public override RectangleF GetOuterFigureRectangle()
+        {
+            return circleOuterRectangle;
         }
 
         private bool IsCrossingYAxis(Size maxPoint)

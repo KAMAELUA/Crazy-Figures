@@ -64,6 +64,11 @@ namespace Work_Project_1_Figures.Figures
             }
         }
 
+        public override RectangleF GetOuterFigureRectangle()
+        {
+            return new RectangleF(A, new Size(size, Convert.ToInt32(C.Y)));
+        }
+
         private Boolean IsCrossingXAxis(Size maxPoint)
         {
             PointF tmpA = PointF.Add(A, motionVector);

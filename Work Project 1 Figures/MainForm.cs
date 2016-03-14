@@ -15,6 +15,10 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Web.Script.Serialization;
 using Work_Project_1_Figures.Figures;
+using Work_Project_1_Figures.Events;
+using System.Media;
+using System.Threading;
+using Work_Project_1_Figures.Interfaces;
 
 namespace Work_Project_1_Figures
 {
@@ -24,7 +28,7 @@ namespace Work_Project_1_Figures
     {
         private int TIMER_INTERVAL = 50;
         private List<Figure> figures;
-        private Timer drawingTimer;
+        private System.Windows.Forms.Timer drawingTimer;
 
         public MainForm()
         {
@@ -47,7 +51,7 @@ namespace Work_Project_1_Figures
                 else if (nodeTagType == typeof(Circle))
                     N.Text = Localization.GetLocalizedString("Circle");
                 else if (nodeTagType == typeof(CustomRectangle))
-                    N.Text = Localization.GetLocalizedString("Rectangle");
+                    N.Text = Localization.GetLocalizedString("CustomRectangle");
             }
 
             this.Text = Localization.GetLocalizedString("FormTitle");
@@ -56,7 +60,7 @@ namespace Work_Project_1_Figures
         public void InitializeElements()
         {
             figures = new List<Figure>();
-            drawingTimer = new Timer();
+            drawingTimer = new System.Windows.Forms.Timer();
             drawingTimer.Tick += DrawingTimer_Tick;
             drawingTimer.Interval = TIMER_INTERVAL;
             drawingTimer.Start();
@@ -84,16 +88,24 @@ namespace Work_Project_1_Figures
             ToggleActionBtn(tmpFigure.isOnMove);
         }
 
-        #region Button func
         private void TriangleBtnClick(object sender, EventArgs e)
         {
             Triangle tmpFigure = new Triangle();
+            tmpFigure.OnStartsIntersect += TmpFigure_OnStartsIntersect;
             figures.Add(tmpFigure);
 
             TreeNode elementNode = new TreeNode(Localization.GetLocalizedString(tmpFigure.GetType().Name));
             elementNode.ForeColor = Color.FromArgb(tmpFigure.argbColor);
             elementNode.Tag = tmpFigure;
             elementsTree.Nodes.Add(elementNode);
+
+            ((IDrawable)tmpFigure).Test();
+            ((IMovable)tmpFigure).Test();
+        }
+
+        private void TmpFigure_OnStartsIntersect(object sender, IntersectionEventArgs e)
+        {
+            new Thread(() => Console.Beep()).Start();
         }
 
         private void CircleBtnClick(object sender, EventArgs e)
@@ -129,8 +141,7 @@ namespace Work_Project_1_Figures
             }
             else
             {
-                BtnAction.Text = Localization.GetLocalizedString("BtnAction.StartText");             
-                
+                BtnAction.Text = Localization.GetLocalizedString("BtnAction.StartText");              
             }
 
         }
@@ -139,10 +150,6 @@ namespace Work_Project_1_Figures
         {
             ToggleFigureState();
         }
-
-        
-
-        #endregion Button func
 
         public void ToggleFigureState()
         {
@@ -166,20 +173,33 @@ namespace Work_Project_1_Figures
             {
                 F.Move(drawingSize);
                 F.Draw(e.Graphics);
-            }
 
-            foreach(Figure F1 in figures)
-            {
                 List<Figure> tmpList = new List<Figure>(figures);
-                tmpList.Remove(F1);
+                tmpList.Remove(F);
 
-                foreach(Figure F2 in tmpList)
+                PerformFigureEvent(F, tmpList);             
+            }
+        }
+
+        public void PerformFigureEvent(Figure F, List<Figure> figures)
+        {
+            foreach (Figure F2 in figures)
+            {
+                if (CheckForIntersect(F, F2))
                 {
-
+                    F.NowIntersects(F2);
+                }
+                else
+                {
+                    F.NotIntersects(F2);
                 }
             }
         }
 
+        public Boolean CheckForIntersect(Figure F1, Figure F2)
+        {
+            return F1.GetOuterFigureRectangle().IntersectsWith(F2.GetOuterFigureRectangle());
+        }
         private void elementsTree_KeyDown(object sender, KeyEventArgs e)
         {
             if (Keys.Delete == e.KeyData)
