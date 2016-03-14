@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Work_Project_1_Figures.Figures;
 
 namespace Work_Project_1_Figures.Events
 {

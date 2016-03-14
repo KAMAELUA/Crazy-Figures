@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Work_Project_1_Figures
+namespace Work_Project_1_Figures.Figures
 {
     [ Serializable,
         XmlInclude(typeof(Triangle)),

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Work_Project_1_Figures.Figures;
 
 namespace Work_Project_1_Figures
 {

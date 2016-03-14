@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using System.Runtime.Serialization;
 
-namespace Work_Project_1_Figures
+namespace Work_Project_1_Figures.Figures
 {
     [Serializable, DataContract]
     public class Triangle : Figure

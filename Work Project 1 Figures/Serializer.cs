@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Work_Project_1_Figures.Figures;
 
 namespace Work_Project_1_Figures
 {

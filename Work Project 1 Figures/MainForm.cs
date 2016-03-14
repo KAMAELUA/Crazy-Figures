@@ -14,6 +14,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Web.Script.Serialization;
+using Work_Project_1_Figures.Figures;
 
 namespace Work_Project_1_Figures
 {
